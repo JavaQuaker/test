@@ -11,7 +11,7 @@ import com.example.testWork.util.UserUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.datafaker.Faker;
 import org.instancio.Instancio;
-//import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -54,6 +54,7 @@ public class UserControllerTests {
     @Autowired
     private UserUtils userUtils;
     private User testUser;
+    @Autowired
     private ModelGenerator modelGenerator;
     @Autowired
     private Faker faker;
@@ -95,7 +96,7 @@ public class UserControllerTests {
         dto.setName(JsonNullable.of(faker.name().name()));
         dto.setEmail(JsonNullable.of(faker.internet().emailAddress()));
         dto.setPassword(JsonNullable.of(faker.internet().password(3, 12)));
-        var request = put("/api/users{id}", testUser.getId()).with(token)
+        var request = put("/api/users/{id}", testUser.getId()).with(token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(dto));
         mockMvc.perform(request)

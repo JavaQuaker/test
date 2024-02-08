@@ -26,6 +26,7 @@ public class ModelGenerator {
                 .supply(Select.field(User::getEmail), () -> faker.internet().emailAddress())
                 .supply(Select.field(User::getPasswordDigest), () -> faker.internet().password(3, 100))
                 .toModel();
+        System.out.println("userModel " + urlModel);
 
         urlModel = Instancio.of(Url.class)
                 .ignore(Select.field(Url::getId))
