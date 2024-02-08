@@ -28,6 +28,8 @@ public class User implements BaseEntity, UserDetails {
 
     private long id;
 
+    private String name;
+
     @Email
     @Column(unique = true)
     private String email;
