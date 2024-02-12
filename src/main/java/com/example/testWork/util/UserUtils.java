@@ -24,7 +24,7 @@ public class UserUtils {
     }
 
     public User getTestUser() {
-        return userRepository.findByEmail("hexlet@example.com")
+        return userRepository.findByEmail("qwe@mail.ru")
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

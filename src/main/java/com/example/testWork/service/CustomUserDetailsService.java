@@ -18,6 +18,12 @@ public class CustomUserDetailsService implements UserDetailsManager {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return user;
+    }
+    @Override
     public void createUser(UserDetails userData) {
         throw new UnsupportedOperationException("User not found");
     }
@@ -40,12 +46,5 @@ public class CustomUserDetailsService implements UserDetailsManager {
     @Override
     public boolean userExists(String username) {
         throw new UnsupportedOperationException("Unimplemented method 'userExists'");
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        var user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return user;
     }
 }

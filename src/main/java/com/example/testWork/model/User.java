@@ -1,6 +1,7 @@
 package com.example.testWork.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,6 +38,7 @@ public class User implements BaseEntity, UserDetails {
     private LocalDate createdDate;
 
     @Size(min = 3)
+    @NotNull
     private String passwordDigest;
 
     @OneToMany(mappedBy = "assignee", fetch = FetchType.LAZY)
