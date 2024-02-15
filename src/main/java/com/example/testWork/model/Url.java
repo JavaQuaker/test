@@ -33,4 +33,8 @@ public class Url implements BaseEntity {
 
     @ManyToOne
     private User assignee;
+
+    @OneToOne(mappedBy = "nameHash")
+    private Hash number;
+
 }

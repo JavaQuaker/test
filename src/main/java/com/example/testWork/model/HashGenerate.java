@@ -1,32 +1,27 @@
 package com.example.testWork.model;
 
+import com.example.testWork.dto.HashCreateDTO;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.Stack;
+
 @Entity
-@Table(name = "hash")
+@Table(name = "stack")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class Hash implements BaseEntity {
+public class HashGenerate implements BaseEntity {
     @Id
-    @GeneratedValue
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
-    private String name;
-
-    @OneToOne
-    @JoinColumn(name = "url_id", unique = true)
-    private Url nameHash;
-
-
+    static Stack<HashCreateDTO> stack = new Stack<>();
+    public static void add(HashCreateDTO dto) {
+       stack.add(dto);
+    }
 }

@@ -1,9 +1,15 @@
 package com.example.testWork.component;
 
+import com.example.testWork.dto.HashCreateDTO;
+import com.example.testWork.dto.HashDTO;
 import com.example.testWork.dto.UserCreateDTO;
+import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.mapper.UserMapper;
-import com.example.testWork.model.Hash;
+
+import com.example.testWork.model.HashGenerate;
+
 import com.example.testWork.model.User;
+import com.example.testWork.repository.HashGenerateRepository;
 import com.example.testWork.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +25,15 @@ public class DataInitializer implements ApplicationRunner {
     @Autowired
     private final UserMapper userMapper;
     @Autowired
+    private final HashMapper hashMapper;
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
+    private final HashGenerateRepository hashGenerateRepository;
     @Override
     public void run(ApplicationArguments args) throws Exception {
         defaultUser();
-//        addHash();
+        addHash();
     }
     public void defaultUser() {
         UserCreateDTO userData = new UserCreateDTO();
@@ -38,8 +48,11 @@ public class DataInitializer implements ApplicationRunner {
     }
     public void addHash() {
         for (int i = 0; i < 100; i++) {
-            Hash hash = new Hash();
-            hash.setNameHash(Converter.convert());
+            HashCreateDTO dto = new HashCreateDTO();
+            dto.setName(Converter.convert());
+            HashGenerate.add(dto);
+            var hash = hashMapper.map(dto);
+            hashGenerateRepository.save(hash);
         }
     }
 }

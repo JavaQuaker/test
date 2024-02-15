@@ -12,6 +12,8 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class UrlUpdateDTO {
     @NotNull
     private JsonNullable<Long> assigneeId;
+    @NotNull
+    JsonNullable<Long> numberId;
     @NotBlank
     private JsonNullable<String> originalUrl;
 

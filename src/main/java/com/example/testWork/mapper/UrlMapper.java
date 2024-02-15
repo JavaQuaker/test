@@ -22,9 +22,12 @@ public abstract class UrlMapper {
     private UrlRepository urlRepository;
 
     @Mapping(target = "assigneeId", source = "assignee.id")
+    @Mapping(target = "numberId", source = "number.id")
     public abstract UrlDTO map(Url model);
     @Mapping(target = "assignee", source = "assigneeId")
+    @Mapping(target = "number", source = "numberId")
     public abstract Url map(UrlCreateDTO dto);
     @Mapping(target = "assignee", source = "assigneeId")
+    @Mapping(target = "number", source = "numberId")
     public abstract void update(UrlUpdateDTO dto, @MappingTarget Url model);
 }
