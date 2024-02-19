@@ -1,6 +1,8 @@
 package com.example.testWork.controller;
 
 import com.example.testWork.dto.HashDTO;
+import com.example.testWork.dto.HashGenerateDTO;
+import com.example.testWork.mapper.HashGenerateMapper;
 import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.model.Hash;
 import com.example.testWork.model.HashGenerate;
@@ -22,14 +24,16 @@ public class HashGenerateController {
     private HashGenerateRepository hashGenerateRepository;
     @Autowired
     private HashMapper hashMapper;
+    @Autowired
+    private HashGenerateMapper hashGenerateMapper;
 
     @GetMapping(path = "")
     @ResponseStatus(HttpStatus.OK)
-    public List<HashDTO> index() {
-        List<HashDTO> result = new ArrayList<>();
-        List<Hash> hashes = hashGenerateRepository.findAll();
-        for (Hash hash : hashes) {
-            HashDTO dto = hashMapper.map(hash);
+    public List<HashGenerateDTO> index() {
+        List<HashGenerateDTO> result = new ArrayList<>();
+        List<HashGenerate> hashes = hashGenerateRepository.findAll();
+        for (HashGenerate hash : hashes) {
+            HashGenerateDTO dto = hashGenerateMapper.map(hash);
             result.add(dto);
         }
         return result;

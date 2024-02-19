@@ -1,22 +1,23 @@
 package com.example.testWork.controller;
 
-import com.example.testWork.dto.UrlCreateDTO;
-import com.example.testWork.dto.UrlDTO;
-import com.example.testWork.dto.UrlUpdateDTO;
+import com.example.testWork.dto.*;
 import com.example.testWork.exception.ResourceNotFoundException;
+import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.mapper.UrlMapper;
+import com.example.testWork.model.Hash;
 import com.example.testWork.model.Url;
+import com.example.testWork.repository.HashGenerateRepository;
+import com.example.testWork.repository.HashRepository;
 import com.example.testWork.repository.UrlRepository;
+import com.example.testWork.repository.UserRepository;
+import com.example.testWork.service.StackManagement;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/urls")
@@ -24,7 +25,19 @@ public class UrlController {
     @Autowired
     private UrlRepository urlRepository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private HashGenerateRepository hashGenerateRepository;
+    @Autowired
+    private HashRepository hashRepository;
+    @Autowired
     private UrlMapper urlMapper;
+    @Autowired
+    private HashMapper hashMapper;
+    @Autowired
+    private StackManagement stackManagement;
+
+
 
     @GetMapping(path = "")
     @ResponseStatus(HttpStatus.OK)
@@ -37,20 +50,45 @@ public class UrlController {
         }
         return result;
     }
+//    @PostMapping(path = "")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public UrlDTO create(@RequestBody UrlCreateDTO urlData) {
+//        Url url = urlMapper.map(urlData);
+//        urlRepository.save(url);
+//        UrlDTO urlDTO = urlMapper.map(url);
+//        return urlDTO;
+//    }
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
-    public UrlDTO create(@RequestBody UrlCreateDTO urlData) {
+    public HashDTO create(@RequestBody UrlCreateDTO urlData) {
         Url url = urlMapper.map(urlData);
+
+        var original = urlData.getUrl();
+
         urlRepository.save(url);
-        UrlDTO urlDTO = urlMapper.map(url);
-        return urlDTO;
+        var urlOriginal = urlRepository.findById(url.getId());
+
+        HashCreateDTO hashCreateDTO = stackManagement.pop();
+        hashCreateDTO.setNameHashId(urlOriginal.get().getId());
+        System.out.println("urls_id " + urlOriginal.get().getId());
+
+
+        Hash hash = hashMapper.map(hashCreateDTO);
+
+        hashRepository.save(hash);
+        System.out.println("testRepoHash " + " " + hash.getName());
+        HashDTO hashDTO = hashMapper.map(hash);
+        return hashDTO;
     }
+
+
     @GetMapping(path = "/{id}")
     public UrlDTO show(@Valid @PathVariable long id) {
         var url = urlRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Url not found"));
         return urlMapper.map(url);
     }
+
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UrlDTO update(@RequestBody UrlUpdateDTO urlData, @PathVariable long id) {

@@ -6,6 +6,7 @@ import com.example.testWork.dto.UserUpdateDTO;
 import com.example.testWork.exception.ResourceNotFoundException;
 import com.example.testWork.mapper.UserMapper;
 import com.example.testWork.model.User;
+import com.example.testWork.repository.UrlRepository;
 import com.example.testWork.repository.UserRepository;
 import com.example.testWork.util.UserUtils;
 import jakarta.validation.Valid;
@@ -22,6 +23,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private UserMapper userMapper;
     @Autowired

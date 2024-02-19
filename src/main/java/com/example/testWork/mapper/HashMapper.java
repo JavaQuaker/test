@@ -22,8 +22,10 @@ public abstract class HashMapper {
     @Autowired
     private HashRepository hashRepository;
     @Mapping(target = "nameHashId", source = "nameHash.id")
+//    @Mapping(target = "userId", source = "user.id")
     public abstract HashDTO map(Hash model);
     @Mapping(target = "nameHash", source = "nameHashId")
+//    @Mapping(target = "user", source = "userId")
     public abstract Hash map(HashCreateDTO dto);
 
 }

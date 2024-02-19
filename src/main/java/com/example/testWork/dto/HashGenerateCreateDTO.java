@@ -3,11 +3,12 @@ package com.example.testWork.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Stack;
+
 @Getter
 @Setter
-public class HashCreateDTO {
+public class HashGenerateCreateDTO {
+    private long id;
     private String name;
-    private long nameHashId;
-//    private long userId;
-
 }

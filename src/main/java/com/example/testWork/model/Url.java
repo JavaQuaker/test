@@ -22,11 +22,12 @@ import java.time.LocalDate;
 public class Url implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
 
     @NotBlank
-    @Column(unique = true)
-    private String originalUrl;
+//    @Column(unique = true)
+    private String url;
 
     @CreatedDate
     private LocalDate createdAt;
@@ -34,7 +35,7 @@ public class Url implements BaseEntity {
     @ManyToOne
     private User assignee;
 
-    @OneToOne(mappedBy = "nameHash")
-    private Hash number;
+//    @OneToOne(mappedBy = "nameHash")
+//    private Hash nameHash;
 
 }

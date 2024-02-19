@@ -25,8 +25,11 @@ public class Hash implements BaseEntity {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "url_id", unique = true)
+    @JoinColumn(name = "url_id")
     private Url nameHash;
 
+//    @ManyToMany
+//    @JoinColumn(name = "user_id")
+//    User user;
 
 }

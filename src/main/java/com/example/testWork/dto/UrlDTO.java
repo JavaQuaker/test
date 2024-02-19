@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Setter
 public class UrlDTO {
     private long id;
-    private String originalUrl;
+    private String url;
     private long assigneeId;
-    private long numberId;
+//    private long numberId;
     private LocalDate createdAt;
 }
