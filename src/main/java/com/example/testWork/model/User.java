@@ -45,6 +45,7 @@ public class User implements BaseEntity, UserDetails {
 
 
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<GrantedAuthority>();

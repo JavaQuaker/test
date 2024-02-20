@@ -30,7 +30,7 @@ public class ModelGenerator {
 
         urlModel = Instancio.of(Url.class)
                 .ignore(Select.field(Url::getId))
-                .supply(Select.field(Url::getOriginalUrl), () -> faker.internet().domainWord())
+                .supply(Select.field(Url::getUrl), () -> faker.internet().domainWord())
                 .toModel();
     }
 }

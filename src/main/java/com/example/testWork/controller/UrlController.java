@@ -62,7 +62,13 @@ public class UrlController {
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
     public HashDTO create(@RequestBody UrlCreateDTO urlData) {
+        var user = userRepository.findById(urlData.getAssigneeId());
+        long id = user.get().getId();
+        if (urlData.getAssigneeId() != id) {
+            throw new ResourceNotFoundException("User not found");
+        }
         Url url = urlMapper.map(urlData);
+        System.out.println("urlAssignee " + urlData.getAssigneeId());
 
         var original = urlData.getUrl();
 
@@ -73,9 +79,7 @@ public class UrlController {
         hashCreateDTO.setNameHashId(urlOriginal.get().getId());
         System.out.println("urls_id " + urlOriginal.get().getId());
 
-
         Hash hash = hashMapper.map(hashCreateDTO);
-
         hashRepository.save(hash);
         System.out.println("testRepoHash " + " " + hash.getName());
         HashDTO hashDTO = hashMapper.map(hash);
