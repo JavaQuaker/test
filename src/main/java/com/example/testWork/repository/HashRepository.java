@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface HashRepository extends JpaRepository<Hash, Long> {
     @Override
     Optional<Hash> findById(Long aLong);
+    Optional<Hash> findByName(String name);
 }

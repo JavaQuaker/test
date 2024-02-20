@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/urls")
@@ -82,11 +83,23 @@ public class UrlController {
     }
 
 
-    @GetMapping(path = "/{id}")
-    public UrlDTO show(@Valid @PathVariable long id) {
-        var url = urlRepository.findById(id)
+//    @GetMapping(path = "/{id}")
+//    public UrlDTO show(@Valid @PathVariable long id) {
+//        var url = urlRepository.findById(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("Url not found"));
+//        return urlMapper.map(url);
+//    }
+    @GetMapping(path = "/{name}")
+    public UrlDTO shortLink(@PathVariable String name) {
+        Hash hash = hashRepository.findByName(name)
+                .orElseThrow(() -> new ResourceNotFoundException("Hash not found"));
+        HashDTO hashDTO = hashMapper.map(hash);
+        long hashId = hashDTO.getNameHashId();
+        System.out.println("hashId " + hashId);
+        Url url = urlRepository.findById(hashId)
                 .orElseThrow(() -> new ResourceNotFoundException("Url not found"));
-        return urlMapper.map(url);
+        UrlDTO urlDTO = urlMapper.map(url);
+        return urlDTO;
     }
 
     @PutMapping(path = "/{id}")

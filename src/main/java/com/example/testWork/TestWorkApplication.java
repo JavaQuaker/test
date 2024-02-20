@@ -1,6 +1,6 @@
 package com.example.testWork;
 
-//import com.example.testWork.service.StackManagement;
+
 import net.datafaker.Faker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
