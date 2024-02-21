@@ -52,6 +52,8 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO create(@Valid @RequestBody UserCreateDTO userData) {
         var user = userMapper.map(userData);
+//        var password = passwordEncoder.encode(user.getPassword());
+//        user.setPasswordDigest(password);
         userRepository.save(user);
         var userDTO = userMapper.map(user);
         return userDTO;

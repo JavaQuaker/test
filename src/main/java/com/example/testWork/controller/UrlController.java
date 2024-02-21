@@ -11,10 +11,14 @@ import com.example.testWork.repository.HashRepository;
 import com.example.testWork.repository.UrlRepository;
 import com.example.testWork.repository.UserRepository;
 import com.example.testWork.service.StackManagement;
+import com.example.testWork.util.UserUtils;
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/urls")
 public class UrlController {
+//    private static final String ONLY_OWNER_BY_ID = """
+//            @userRepository.findById(#id).get().getEmail() == authentication.name
+//        """;
+
     @Autowired
     private UrlRepository urlRepository;
     @Autowired
@@ -37,6 +45,13 @@ public class UrlController {
     private HashMapper hashMapper;
     @Autowired
     private StackManagement stackManagement;
+
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserUtils userUtils;
+
+
+
 
 
 
@@ -59,14 +74,17 @@ public class UrlController {
 //        UrlDTO urlDTO = urlMapper.map(url);
 //        return urlDTO;
 //    }
+//    @PreAuthorize(ONLY_OWNER_BY_ID)
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
-    public HashDTO create(@RequestBody UrlCreateDTO urlData) {
-        var user = userRepository.findById(urlData.getAssigneeId());
-        long id = user.get().getId();
-        if (urlData.getAssigneeId() != id) {
-            throw new ResourceNotFoundException("User not found");
-        }
+    public HashDTO create(@Valid @RequestBody UrlCreateDTO urlData) {
+       var currentUser = userUtils.getCurrentUser();
+       long id = currentUser.getId();
+        System.out.println("id " + id);
+
+        var user = userRepository.findById(id);
+
+        urlData.setAssigneeId(id);
         Url url = urlMapper.map(urlData);
         System.out.println("urlAssignee " + urlData.getAssigneeId());
 
@@ -93,6 +111,7 @@ public class UrlController {
 //                .orElseThrow(() -> new ResourceNotFoundException("Url not found"));
 //        return urlMapper.map(url);
 //    }
+
     @GetMapping(path = "/{name}")
     public UrlDTO shortLink(@PathVariable String name) {
         Hash hash = hashRepository.findByName(name)

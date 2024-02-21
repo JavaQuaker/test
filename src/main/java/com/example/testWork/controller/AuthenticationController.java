@@ -23,3 +23,4 @@ public class AuthenticationController {
         return jwtUtils.generateToken(authRequest.getUsername());
     }
 }
+
