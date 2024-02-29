@@ -10,6 +10,7 @@ import com.example.testWork.repository.HashGenerateRepository;
 import com.example.testWork.repository.HashRepository;
 import com.example.testWork.repository.UrlRepository;
 import com.example.testWork.repository.UserRepository;
+import com.example.testWork.service.ParseClass;
 import com.example.testWork.service.StackManagement;
 import com.example.testWork.util.UserUtils;
 import jakarta.validation.Valid;
@@ -20,9 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.net.MalformedURLException;
+import java.sql.SQLException;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/urls")
@@ -50,6 +51,8 @@ public class UrlController {
     @Autowired
     private UserUtils userUtils;
 
+    private ParseClass parse;
+
 
 
 
@@ -66,44 +69,76 @@ public class UrlController {
         }
         return result;
     }
-//    @PostMapping(path = "")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public UrlDTO create(@RequestBody UrlCreateDTO urlData) {
-//        Url url = urlMapper.map(urlData);
-//        urlRepository.save(url);
-//        UrlDTO urlDTO = urlMapper.map(url);
-//        return urlDTO;
-//    }
-//    @PreAuthorize(ONLY_OWNER_BY_ID)
+    @PostMapping(path = "")
+    @ResponseStatus(HttpStatus.CREATED)
+    public HashDTO create(@Valid @RequestBody DataDto data) {
+        UrlCreateDTO urlCreateDTO = data.getUrlData();
+        HashCreateDTO hashCreateDTO = data.getHashData();
+        var currentUser = userUtils.getCurrentUser();
+        long id = currentUser.getId();
+        Optional<Url> url = urlRepository.findByUrl(urlCreateDTO.getUrl());
+        if (url.isPresent()) {
+            Optional<Hash> hash = hashRepository.findById(url.get().getId());
+            HashDTO dto = hashMapper.map(hash.get());
+            return dto;
+
+        } else {
+            urlCreateDTO.setAssigneeId(id);
+            Url url1 = urlMapper.map(urlCreateDTO);
+            urlRepository.save(url1);
+            var urlOriginal = urlRepository.findById(url1.getId());
+            if (hashCreateDTO == null) {
+                hashCreateDTO = stackManagement.pop();
+                hashCreateDTO.setNameHashId(urlOriginal.get().getId());
+                System.out.println("urls_id " + urlOriginal.get().getId());
+
+                Hash hash = hashMapper.map(hashCreateDTO);
+                hashRepository.save(hash);
+                System.out.println("testRepoHash " + " " + hash.getName());
+                HashDTO hashDTO = hashMapper.map(hash);
+                return hashDTO;
+            } else {
+                hashCreateDTO.setName(hashCreateDTO.getName());
+                hashCreateDTO.setNameHashId(urlOriginal.get().getId());
+                Hash hash = hashMapper.map(hashCreateDTO);
+                System.out.println("nameWrite " + hashCreateDTO.getName());
+                hashRepository.save(hash);
+                HashDTO dto = hashMapper.map(hash);
+                return dto;
+            }
+        }
+    }
+
+/*
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
     public HashDTO create(@Valid @RequestBody UrlCreateDTO urlData) {
        var currentUser = userUtils.getCurrentUser();
        long id = currentUser.getId();
-        System.out.println("id " + id);
+       Optional<Url> url1 = urlRepository.findByUrl(urlData.getUrl());
 
-        var user = userRepository.findById(id);
+       if (url1.isPresent()) {
+           Optional<Hash> hash = hashRepository.findById(url1.get().getId());
+           HashDTO dto = hashMapper.map(hash.get());
+           return dto;
+       } else {
+           urlData.setAssigneeId(id);
+           Url url = urlMapper.map(urlData);
+           urlRepository.save(url);
+           var urlOriginal = urlRepository.findById(url.getId());
 
-        urlData.setAssigneeId(id);
-        Url url = urlMapper.map(urlData);
-        System.out.println("urlAssignee " + urlData.getAssigneeId());
+           HashCreateDTO hashCreateDTO = stackManagement.pop();
+           hashCreateDTO.setNameHashId(urlOriginal.get().getId());
+           System.out.println("urls_id " + urlOriginal.get().getId());
 
-        var original = urlData.getUrl();
-
-        urlRepository.save(url);
-        var urlOriginal = urlRepository.findById(url.getId());
-
-        HashCreateDTO hashCreateDTO = stackManagement.pop();
-        hashCreateDTO.setNameHashId(urlOriginal.get().getId());
-        System.out.println("urls_id " + urlOriginal.get().getId());
-
-        Hash hash = hashMapper.map(hashCreateDTO);
-        hashRepository.save(hash);
-        System.out.println("testRepoHash " + " " + hash.getName());
-        HashDTO hashDTO = hashMapper.map(hash);
-        return hashDTO;
-    }
-
+           Hash hash = hashMapper.map(hashCreateDTO);
+           hashRepository.save(hash);
+           System.out.println("testRepoHash " + " " + hash.getName());
+           HashDTO hashDTO = hashMapper.map(hash);
+           return hashDTO;
+       }
+   }
+*/
 
 //    @GetMapping(path = "/{id}")
 //    public UrlDTO show(@Valid @PathVariable long id) {
