@@ -4,6 +4,7 @@ import com.example.testWork.dto.HashCreateDTO;
 import com.example.testWork.dto.HashDTO;
 import com.example.testWork.dto.UrlCreateDTO;
 import com.example.testWork.dto.UrlDTO;
+import com.example.testWork.exception.ResourceNotFoundException;
 import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.mapper.UrlMapper;
 import com.example.testWork.model.Hash;
@@ -45,5 +46,11 @@ public class HashController {
         }
         return result;
     }
-
+    @DeleteMapping(path = "")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remove(@PathVariable long id) {
+        Hash hash = hashRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Hash not found"));
+        hashRepository.deleteById(id);
+    }
 }

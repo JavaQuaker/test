@@ -2,6 +2,7 @@ package com.example.testWork.controller;
 
 import com.example.testWork.dto.UserCreateDTO;
 import com.example.testWork.dto.UserUpdateDTO;
+import com.example.testWork.model.Url;
 import com.example.testWork.model.User;
 import com.example.testWork.repository.UrlRepository;
 import com.example.testWork.repository.UserRepository;
@@ -54,6 +55,7 @@ public class UserControllerTests {
     @Autowired
     private UserUtils userUtils;
     private User testUser;
+    private Url testUrl;
     @Autowired
     private ModelGenerator modelGenerator;
     @Autowired
