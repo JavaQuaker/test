@@ -8,6 +8,7 @@ import com.example.testWork.mapper.UserMapper;
 import com.example.testWork.model.User;
 import com.example.testWork.repository.UrlRepository;
 import com.example.testWork.repository.UserRepository;
+import com.example.testWork.service.UserService;
 import com.example.testWork.util.UserUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,47 +31,34 @@ public class UserController {
     private UserUtils userUtils;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserService userService;
 
     @GetMapping(path = "")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDTO>> index() {
-        List<User> users = userRepository.findAll();
-        List<UserDTO> result = users.stream()
-                .map(userMapper::map)
-                .toList();
+        var users = userService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(users.size()))
-                .body(result);
+                .body(users);
     }
     @GetMapping(path = "/{id}")
     public UserDTO show(@PathVariable long id) {
-        var user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        return userMapper.map(user);
+        return userService.findById(id);
     }
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO create(@Valid @RequestBody UserCreateDTO userData) {
-        var user = userMapper.map(userData);
-        userRepository.save(user);
-        var userDTO = userMapper.map(user);
-        return userDTO;
+        return userService.create(userData);
     }
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     UserDTO update(@RequestBody UserUpdateDTO userData, @PathVariable long id) {
-        var user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        userMapper.update(userData, user);
-        userRepository.save(user);
-        var userDTO = userMapper.map(user);
-        return userDTO;
+        return userService.update(userData, id);
     }
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
-        var user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        userRepository.deleteById(id);
+        userService.delete(id);
     }
 }

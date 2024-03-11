@@ -1,5 +1,6 @@
 package com.example.testWork.util;
 
+import com.example.testWork.model.Hash;
 import com.example.testWork.model.Url;
 import com.example.testWork.model.User;
 import jakarta.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class ModelGenerator {
     private Model<User> userModel;
     private Model<Url> urlModel;
+    private Model<Hash> hashModel;
     @Autowired
     private Faker faker;
     @PostConstruct
@@ -32,5 +34,9 @@ public class ModelGenerator {
                 .ignore(Select.field(Url::getId))
                 .supply(Select.field(Url::getUrl), () -> faker.internet().domainWord())
                 .toModel();
+        System.out.println("urlModel" + urlModel);
+
+
+
     }
 }
