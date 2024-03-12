@@ -8,7 +8,6 @@ import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.mapper.UrlMapper;
 import com.example.testWork.model.Hash;
 import com.example.testWork.model.Url;
-import com.example.testWork.model.User;
 import com.example.testWork.repository.HashRepository;
 import com.example.testWork.repository.UrlRepository;
 import com.example.testWork.repository.UserRepository;
@@ -19,7 +18,6 @@ import com.example.testWork.util.UserUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.datafaker.Faker;
 import org.instancio.Instancio;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,20 +27,12 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.assertj.core.api.Assertions.assertThat;
-import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
-
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 
@@ -79,7 +69,7 @@ public class UrlControllerTests {
     private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor token;
 
     @BeforeEach
-    public void SetUp() {
+    public void setUp() {
         token = jwt().jwt(builder -> builder.subject("qwe@mail.ru"));
         var user = userRepository.findByEmail("qwe@mail.ru")
                 .orElseThrow(() -> new RuntimeException("User not exist"));

@@ -1,6 +1,12 @@
 package com.example.testWork.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +33,4 @@ public class Hash implements BaseEntity {
     @OneToOne
     @JoinColumn(name = "url_id")
     private Url nameHash;
-
-//    @ManyToMany
-//    @JoinColumn(name = "user_id")
-//    User user;
-
 }

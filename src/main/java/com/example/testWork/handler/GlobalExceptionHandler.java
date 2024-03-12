@@ -1,7 +1,6 @@
 package com.example.testWork.handler;
 
 import com.example.testWork.exception.ResourceNotFoundException;
-import io.micrometer.core.ipc.http.HttpSender;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

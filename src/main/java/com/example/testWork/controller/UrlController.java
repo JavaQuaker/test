@@ -2,17 +2,10 @@ package com.example.testWork.controller;
 
 import com.example.testWork.dto.UrlDTO;
 import com.example.testWork.dto.HashDTO;
-import com.example.testWork.dto.UrlCreateDTO;
-import com.example.testWork.dto.HashCreateDTO;
-import com.example.testWork.dto.HashUpdateDTO;
 import com.example.testWork.dto.UrlUpdateDTO;
 import com.example.testWork.dto.DataDto;
-
-import com.example.testWork.exception.ResourceNotFoundException;
 import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.mapper.UrlMapper;
-import com.example.testWork.model.Hash;
-import com.example.testWork.model.Url;
 import com.example.testWork.repository.HashGenerateRepository;
 import com.example.testWork.repository.HashRepository;
 import com.example.testWork.repository.UrlRepository;
@@ -22,7 +15,6 @@ import com.example.testWork.service.StackManagement;
 import com.example.testWork.service.UrlService;
 import com.example.testWork.util.UserUtils;
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -38,11 +30,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.net.MalformedURLException;
-
-import java.net.URLStreamHandler;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/urls")

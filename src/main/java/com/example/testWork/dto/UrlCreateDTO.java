@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class UrlCreateDTO {
     private long assigneeId;
-//    private long numberId;
     private String url;
 
 }

@@ -1,16 +1,15 @@
 package com.example.testWork.component;
 
-import com.example.testWork.dto.*;
+import com.example.testWork.dto.UserCreateDTO;
+import com.example.testWork.dto.HashGenerateCreateDTO;
 import com.example.testWork.mapper.HashGenerateMapper;
 import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.mapper.UserMapper;
-
 import com.example.testWork.model.HashGenerate;
-
 import com.example.testWork.model.User;
 import com.example.testWork.repository.HashGenerateRepository;
 import com.example.testWork.repository.UserRepository;
-//import com.example.testWork.service.StackManagement;
+
 import com.example.testWork.service.StackManagement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import org.springframework.boot.ApplicationRunner;
 import com.example.testWork.service.Converter;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+
 
 
 @Component

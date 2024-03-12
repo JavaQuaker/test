@@ -1,25 +1,25 @@
 package com.example.testWork.controller;
 
-import com.example.testWork.dto.HashCreateDTO;
 import com.example.testWork.dto.HashDTO;
-import com.example.testWork.dto.UrlCreateDTO;
-import com.example.testWork.dto.UrlDTO;
-import com.example.testWork.exception.ResourceNotFoundException;
 import com.example.testWork.mapper.HashMapper;
 import com.example.testWork.mapper.UrlMapper;
 import com.example.testWork.model.Hash;
-import com.example.testWork.model.Url;
+
 import com.example.testWork.repository.HashRepository;
 import com.example.testWork.repository.UrlRepository;
-import com.example.testWork.service.StackManagement;
-import com.example.testWork.util.UserUtils;
+import com.example.testWork.service.HashService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/hash")
@@ -33,24 +33,17 @@ public class HashController {
     @Autowired
     private UrlMapper urlMapper;
     @Autowired
-    private UserUtils userUtils;
+    private HashService hashService;
 
     @GetMapping(path = "")
     @ResponseStatus(HttpStatus.OK)
     public List<HashDTO> index() {
         List<Hash> hashes = hashRepository.findAll();
-        List<HashDTO> result = new ArrayList<>();
-        for (Hash hash : hashes) {
-            HashDTO dto = hashMapper.map(hash);
-            result.add(dto);
-        }
-        return result;
+        return hashService.index();
     }
     @DeleteMapping(path = "")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remove(@PathVariable long id) {
-        Hash hash = hashRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Hash not found"));
-        hashRepository.deleteById(id);
+        hashService.remove(id);
     }
 }

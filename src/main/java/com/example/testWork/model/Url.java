@@ -1,12 +1,17 @@
 package com.example.testWork.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -26,7 +31,6 @@ public class Url implements BaseEntity {
     private long id;
 
     @NotBlank
-//    @Column(unique = true)
     private String url;
 
     @CreatedDate
@@ -34,8 +38,4 @@ public class Url implements BaseEntity {
 
     @ManyToOne
     private User assignee;
-
-//    @OneToOne(mappedBy = "nameHash")
-//    private Hash nameHash;
-
 }

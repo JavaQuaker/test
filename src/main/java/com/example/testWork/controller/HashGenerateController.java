@@ -1,10 +1,9 @@
 package com.example.testWork.controller;
 
-import com.example.testWork.dto.HashDTO;
+
 import com.example.testWork.dto.HashGenerateDTO;
 import com.example.testWork.mapper.HashGenerateMapper;
 import com.example.testWork.mapper.HashMapper;
-import com.example.testWork.model.Hash;
 import com.example.testWork.model.HashGenerate;
 import com.example.testWork.repository.HashGenerateRepository;
 import org.springframework.beans.factory.annotation.Autowired;

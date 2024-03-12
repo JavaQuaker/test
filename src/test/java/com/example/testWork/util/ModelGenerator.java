@@ -35,8 +35,5 @@ public class ModelGenerator {
                 .supply(Select.field(Url::getUrl), () -> faker.internet().domainWord())
                 .toModel();
         System.out.println("urlModel" + urlModel);
-
-
-
     }
 }

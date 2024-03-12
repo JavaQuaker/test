@@ -6,14 +6,13 @@ import com.example.testWork.exception.ResourceNotFoundException;
 import com.example.testWork.mapper.HashGenerateMapper;
 import com.example.testWork.mapper.HashMapper;
 
-import com.example.testWork.model.Hash;
 import com.example.testWork.model.HashGenerate;
 import com.example.testWork.repository.HashGenerateRepository;
 import com.example.testWork.repository.HashRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 
 @Service

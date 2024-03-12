@@ -9,5 +9,5 @@ public class HashDTO {
     private long id;
     private String name;
     private long nameHashId;
-//    private long userId;
+
 }

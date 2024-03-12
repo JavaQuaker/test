@@ -4,7 +4,13 @@ import com.example.testWork.dto.UserCreateDTO;
 import com.example.testWork.dto.UserDTO;
 import com.example.testWork.dto.UserUpdateDTO;
 import com.example.testWork.model.User;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.BeforeMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

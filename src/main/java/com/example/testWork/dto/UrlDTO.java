@@ -11,6 +11,5 @@ public class UrlDTO {
     private long id;
     private String url;
     private long assigneeId;
-//    private long numberId;
     private LocalDate createdAt;
 }

@@ -1,10 +1,8 @@
 package com.example.testWork.service;
 import org.springframework.stereotype.Service;
-
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
+
 
 @Service
 public class ParseClass {
@@ -19,14 +17,5 @@ public class ParseClass {
             System.out.println("incorrect Url");
             return false;
         }
-//        String normalised = String.format("%s://%%s",
-//                        parsedUrl.getProtocol(),
-//                        parsedUrl.getHost(),
-//                        parsedUrl.getPort() == -1 ? "" : ":" + parsedUrl.getPort()
-//                )
-//                .toLowerCase();
-//        return normalised;
-
-
     }
 }

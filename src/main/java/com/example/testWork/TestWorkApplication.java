@@ -1,7 +1,5 @@
 package com.example.testWork;
 
-
-import com.example.testWork.service.ParseClass;
 import net.datafaker.Faker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +12,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableCaching
 public class TestWorkApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TestWorkApplication.class, args);
-	}
+    public static void main(String[] args) {
+    SpringApplication.run(TestWorkApplication.class, args);
+        }
 	@Bean
 	public Faker getFaker() {
 		return new Faker();

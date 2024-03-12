@@ -30,10 +30,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.example.testWork.mapper.UserMapper;
 import org.assertj.core.api.Assertions;
 import org.springframework.test.web.servlet.MvcResult;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 
@@ -128,5 +126,4 @@ public class UserControllerTests {
                 .andExpect(status().isNoContent());
         assertThat(userRepository.existsById(testUser.getId())).isFalse();
     }
-
 }

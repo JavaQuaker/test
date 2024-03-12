@@ -1,30 +1,22 @@
 package com.example.testWork.service;
 
-import com.example.testWork.dto.*;
+import com.example.testWork.dto.UserDTO;
+import com.example.testWork.dto.UserCreateDTO;
+import com.example.testWork.dto.UserUpdateDTO;
 import com.example.testWork.exception.ResourceNotFoundException;
-import com.example.testWork.mapper.HashMapper;
+
 import com.example.testWork.mapper.UrlMapper;
 import com.example.testWork.mapper.UserMapper;
-import com.example.testWork.model.Hash;
-import com.example.testWork.model.Url;
-import com.example.testWork.model.User;
-import com.example.testWork.repository.HashRepository;
 import com.example.testWork.repository.UrlRepository;
 import com.example.testWork.repository.UserRepository;
 import com.example.testWork.util.UserUtils;
-import jakarta.validation.Valid;
+
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @AllArgsConstructor
@@ -75,6 +67,4 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         userRepository.deleteById(id);
     }
-
-
 }

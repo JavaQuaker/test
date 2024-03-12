@@ -8,6 +8,5 @@ import lombok.Setter;
 public class HashCreateDTO {
     private String name;
     private long nameHashId;
-//    private long userId;
 
 }

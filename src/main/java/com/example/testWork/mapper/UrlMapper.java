@@ -5,7 +5,12 @@ import com.example.testWork.dto.UrlDTO;
 import com.example.testWork.dto.UrlUpdateDTO;
 import com.example.testWork.model.Url;
 import com.example.testWork.repository.UrlRepository;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
