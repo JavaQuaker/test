@@ -83,7 +83,7 @@ public class UrlControllerTests {
 
     }
     public void clear() {
-        urlRepository.delete(testUrl);
+        urlRepository.deleteAll();
     }
     @Test
     public void testIndexUrl() throws Exception {
@@ -177,14 +177,14 @@ public class UrlControllerTests {
 
     }
     @Test
-    public void whenExceptionThrown_thenAssertionSucceeds() {
+    public void whenExceptionThrownAssertionSucceeds() {
         Exception exception = assertThrows(MalformedURLException.class, () -> {
             DataDto dto = new DataDto();
             UrlCreateDTO urlCreateDTO = new UrlCreateDTO();
             HashCreateDTO hashCreateDTO = new HashCreateDTO();
             urlCreateDTO.setUrl("ya.ru");
             urlCreateDTO.setAssigneeId(userUtils.getTestUser().getId());
-            hashCreateDTO.setName("newHash");
+            hashCreateDTO.setName("");
             dto.setUrlData(urlCreateDTO);
             dto.setHashData(hashCreateDTO);
 

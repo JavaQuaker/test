@@ -1,5 +1,4 @@
 package com.example.testWork.controller;
-
 import com.example.testWork.dto.UserCreateDTO;
 import com.example.testWork.dto.UserUpdateDTO;
 import com.example.testWork.model.Url;
@@ -37,6 +36,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 @SpringBootTest
 @AutoConfigureMockMvc
+
 public class UserControllerTests {
     @Autowired
     private MockMvc mockMvc;
