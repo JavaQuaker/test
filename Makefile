@@ -26,7 +26,8 @@ test:
 	./gradlew test
 
 report:
-	./gradlew jacocoTestReport
+	#./gradlew jacocoTestReport
+    jacocoTestReport
 
 check-updates:
 	./gradlew dependencyUpdates
