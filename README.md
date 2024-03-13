@@ -1,12 +1,12 @@
-#API для сокращения Url адреса
-#Как работает
+# API для сокращения Url адреса
+# Как работает
 ## Docker
-###Авторизация
+### Авторизация
 Для работе в приложении необходима авторизация.
 Для первого входа необходимо пройти аутентификацию по токену:
 
-Запрос: 
-post/http://localhost:8080/api/login
+post запрос: 
+http://localhost:8080/api/login
 ```
 username: qwe@mail.ru
 password: qwerty
@@ -14,8 +14,8 @@ password: qwerty
 ###
 Пример для проверки генерации коротких ссылок в Postman:
 
-Запрос:
-post/http://localhost:8080/api/urls
+post запрос:
+http://localhost:8080/api/urls
 ```
 {
     "urlData": {
@@ -37,8 +37,8 @@ post/http://localhost:8080/api/urls
 
 ###
 Пример для проверки ссылки введенной вручную:
-Запрос:
-post/http://localhost:8080/api/urls
+post запрос:
+http://localhost:8080/api/urls
 ```
 {
     "urlData": {
@@ -59,7 +59,7 @@ post/http://localhost:8080/api/urls
 ```
 ###
 Пимер ввода короткой ссылки для получения исходного url:
-Запрос:
+get запрос:
 http://localhost:8080/api/urls/zxcvb
 Ответ:
 ```
