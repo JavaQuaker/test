@@ -32,6 +32,11 @@ configurations {
 repositories {
 	mavenCentral()
 }
+jacocoTestReport {
+	reports {
+		xml.required = true
+	}
+}
 
 dependencies {
 	runtimeOnly 'com.h2database:h2'
@@ -62,3 +67,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
