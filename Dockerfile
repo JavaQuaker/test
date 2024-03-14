@@ -17,7 +17,7 @@ ENV PATH=$PATH:$GRADLE_HOME/bin
 
 WORKDIR /app
 
-COPY D:/Project/testWork .
+COPY . .
 
 RUN ./gradlew installDist
 
