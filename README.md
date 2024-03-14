@@ -1,6 +1,6 @@
 # API для сокращения Url адреса
-<a href="https://codeclimate.com/github/JavaQuaker/test/maintainability"><img src="https://api.codeclimate.com/v1/badges/9cd50f82ca8c9a8c1cac/maintainability" /></a>
-<a href="https://codeclimate.com/github/JavaQuaker/test/test_coverage"><img src="https://api.codeclimate.com/v1/badges/9cd50f82ca8c9a8c1cac/test_coverage" /></a>
+[![Maintainability](https://api.codeclimate.com/v1/badges/9cd50f82ca8c9a8c1cac/maintainability)](https://codeclimate.com/github/JavaQuaker/test/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9cd50f82ca8c9a8c1cac/test_coverage)](https://codeclimate.com/github/JavaQuaker/test/test_coverage)
 # Docker
 ## Как работает
 ### Авторизация
