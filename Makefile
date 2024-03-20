@@ -17,7 +17,7 @@ install:
 	./gradlew installDist
 
 start-dist:
-	./build/install/app/bin/app
+	./build/install/testWork/bin/testWork
 
 lint:
 	./gradlew checkstyleMain checkstyleTest

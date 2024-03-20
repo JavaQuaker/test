@@ -15,11 +15,11 @@ RUN mv gradle-${GRADLE_VERSION} ${GRADLE_HOME}
 
 ENV PATH=$PATH:$GRADLE_HOME/bin
 
-WORKDIR /app
-
+WORKDIR /testWork
 COPY . .
 
 RUN ./gradlew installDist
 
+CMD build/install/testWork/bin/testWork
 
-CMD build/install/app/bin/app
+EXPOSE 3000

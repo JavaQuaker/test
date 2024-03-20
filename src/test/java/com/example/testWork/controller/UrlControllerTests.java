@@ -26,6 +26,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
+//import org.springframework.test.web.servlet.MvcResult;
+//import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+//
+//import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.net.MalformedURLException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -199,4 +203,39 @@ public class UrlControllerTests {
         String actualMessage = exception.getMessage();
         assertTrue(expectedMessage.contains(actualMessage));
     }
+    /*@Test
+    public void testShowUrl() throws Exception { // дописать тест!!!
+        DataDto dto = new DataDto();
+        UrlCreateDTO urlCreateDTO = new UrlCreateDTO();
+        HashCreateDTO hashCreateDTO = new HashCreateDTO();
+        urlCreateDTO.setUrl("http://mail.ru");
+        urlCreateDTO.setAssigneeId(userUtils.getTestUser().getId());
+        hashCreateDTO.setName("asdf");
+        dto.setUrlData(urlCreateDTO);
+        dto.setHashData(hashCreateDTO);
+
+        Url url = urlMapper.map(dto.getUrlData());
+        Hash hash = hashMapper.map(dto.getHashData());
+        urlRepository.save(url);
+        hashRepository.save(hash);
+
+        var urlBase = urlRepository.findByUrl(dto.getUrlData().getUrl())
+                .orElseThrow(() -> new ResourceNotFoundException("url not found"));
+        Hash hashBase = hashRepository.findById(url.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("hash not found"));
+
+        System.out.println("hashBaseTest " + hashBase.getName());
+        System.out.println("ulrBaseTest " + urlBase.getUrl());
+        var request = get("/api/urls/{name}",
+                dto.getUrlData(), dto.getHashData()).with(token);
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andReturn();
+
+        var body = result.getResponse().getContentAsString();
+        assertThatJson(body).and(
+                v -> v.node("url").isEqualTo(dto.getUrlData()),
+                v -> v.node("assignee").isEqualTo(dto.getUrlData().getAssigneeId())
+        );
+    }*/
 }
