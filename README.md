@@ -4,6 +4,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9cd50f82ca8c9a8c1cac/test_coverage)](https://codeclimate.com/github/JavaQuaker/test/test_coverage)
 # Docker:
 ```
+docker build -t short .
 docker run -it -p 3000:8080 short
 ```
 ## Как работает
