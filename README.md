@@ -2,14 +2,17 @@
 [![Actions Status](https://github.com/JavaQuaker/test/actions/workflows/main.yml/badge.svg)](https://github.com/JavaQuaker/test/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9cd50f82ca8c9a8c1cac/maintainability)](https://codeclimate.com/github/JavaQuaker/test/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9cd50f82ca8c9a8c1cac/test_coverage)](https://codeclimate.com/github/JavaQuaker/test/test_coverage)
-# Docker
+# Docker:
+```
+docker run -it -p 3000:8080 short
+```
 ## Как работает
 ### Авторизация
 Для работе в приложении необходима авторизация.
 Для первого входа необходимо пройти аутентификацию по токену:
 
 post запрос: 
-http://localhost:8080/api/login
+http://localhost:3000/api/login
 ```
 username: qwe@mail.ru
 password: qwerty
@@ -18,7 +21,7 @@ password: qwerty
 Пример для проверки генерации коротких ссылок в Postman:
 
 post запрос:
-http://localhost:8080/api/urls
+http://localhost:3000/api/urls
 ```
 {
     "urlData": {
@@ -41,7 +44,7 @@ http://localhost:8080/api/urls
 ###
 Пример для проверки ссылки введенной вручную:
 post запрос:
-http://localhost:8080/api/urls
+http://localhost:3000/api/urls
 ```
 {
     "urlData": {
@@ -63,7 +66,7 @@ http://localhost:8080/api/urls
 ###
 Пимер ввода короткой ссылки для получения исходного url:
 get запрос:
-http://localhost:8080/api/urls/zxcvb
+http://localhost:3000/api/urls/zxcvb
 Ответ:
 ```
 {
