@@ -20,7 +20,7 @@ java {
 }
 application {
 	// Входная точка
-	mainClass = 'com.example.TestWorkApplication'
+	mainClass = 'com.example.testWork.TestWorkApplication'
 }
 
 configurations {
